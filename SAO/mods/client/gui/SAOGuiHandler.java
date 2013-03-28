@@ -1,9 +1,6 @@
 package SAO.mods.client.gui;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.tileentity.TileEntityEnderChest;
 import net.minecraft.world.World;
 import SAO.mods.SAOMOD;
 import SAO.mods.inventory.ContainerSkill;

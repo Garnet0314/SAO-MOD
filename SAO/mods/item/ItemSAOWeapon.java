@@ -1,13 +1,13 @@
 package SAO.mods.item;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import SAO.mods.SAOMOD;
 import SAO.mods.entity.ISAOMob;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +22,7 @@ public class ItemSAOWeapon extends Item
         this.saoWeapon = par2EnumSAOWeapon;
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumSAOWeapon.getMaxUses());
-        this.setCreativeTab(CreativeTabs.tabCombat);
+        this.setCreativeTab(SAOMOD.saoTabs);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class ItemSAOWeapon extends Item
         	else
         	{
         		par1ItemStack.damageItem(10, par3EntityLiving);
-        		if (par3EntityLiving.getRNG().nextInt(5) == 0)
+        		if (par3EntityLiving.getRNG().nextInt(3) == 0)
         		{
-        			var1.addExhaustion(1);
+        			var1.addExhaustion(4);
         		}
         	}
         }

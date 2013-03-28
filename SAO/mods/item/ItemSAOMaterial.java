@@ -1,10 +1,10 @@
 package SAO.mods.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.Item;
+import SAO.mods.SAOMOD;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 
 public class ItemSAOMaterial extends Item
 {
@@ -16,7 +16,7 @@ public class ItemSAOMaterial extends Item
     {
         super(par1);
         this.maxStackSize = 1;
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(SAOMOD.saoTabs);
         this.propertyName = "Normal";
         this.propertyLevel = 0;
     }

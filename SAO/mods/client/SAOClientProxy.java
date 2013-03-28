@@ -1,6 +1,5 @@
 package SAO.mods.client;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import SAO.mods.client.gui.GuiSkill;
 import SAO.mods.core.SAOKeyHandler;

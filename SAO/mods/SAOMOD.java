@@ -3,6 +3,7 @@ package SAO.mods;
 import java.util.logging.Level;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import SAO.mods.client.gui.SAOGuiHandler;
 import SAO.mods.core.BuildSAOBlock;
@@ -11,6 +12,7 @@ import SAO.mods.core.BuildSAOWeapon;
 import SAO.mods.core.ConfigBlock;
 import SAO.mods.core.ConfigItem;
 import SAO.mods.core.ConfigWeapon;
+import SAO.mods.core.SAOCreativeTab;
 import SAO.mods.core.SAOServerProxy;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -34,6 +36,8 @@ public class SAOMOD
     private ConfigWeapon configWeapon = new ConfigWeapon();
     private ConfigBlock configBlock = new ConfigBlock();
     private ConfigItem configItem = new ConfigItem();
+
+    public final static CreativeTabs saoTabs = new SAOCreativeTab("SAO");
 
     private KeyBinding keyBinding;
 

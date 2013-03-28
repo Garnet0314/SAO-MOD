@@ -2,8 +2,9 @@ package SAO.mods.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
-import SAO.mods.Block.BlockGrassUB;
-import SAO.mods.Block.BlockStoneDm;
+import SAO.mods.SAOMOD;
+import SAO.mods.block.BlockGrassUB;
+import SAO.mods.block.BlockStoneDm;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BuildSAOBlock
@@ -15,7 +16,7 @@ public class BuildSAOBlock
 
     public static void build(ConfigBlock par1)
     {
-        stoneUB = (new BlockStone(par1.blockUB + 1)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone");
+        stoneUB = (new BlockStone(par1.blockUB + 1)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone").setCreativeTab(SAOMOD.saoTabs);
         GameRegistry.registerBlock(stoneUB, "StoneUB");
         grassUB = (BlockGrassUB)(new BlockGrassUB(par1.blockUB + 2)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grass");
         GameRegistry.registerBlock(grassUB, "GrassUB");

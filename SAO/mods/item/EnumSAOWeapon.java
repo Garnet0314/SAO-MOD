@@ -1,7 +1,5 @@
 ﻿package SAO.mods.item;
 
-import net.minecraft.item.Item;
-
 public enum EnumSAOWeapon
 {
     //耐久、斬撃、刺突、打撃、貫通、地水火風光闇、必要スキルレベル、必要スキル

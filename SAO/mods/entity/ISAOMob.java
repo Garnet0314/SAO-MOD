@@ -1,7 +1,5 @@
 package SAO.mods.entity;
 
-import net.minecraft.entity.EntityLiving;
-
 public interface ISAOMob
 {
     int getSlashResist();
