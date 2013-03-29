@@ -6,6 +6,7 @@ import SAO.mods.core.SAOKeyHandler;
 import SAO.mods.core.SAOServerProxy;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,6 +16,7 @@ public class SAOClientProxy extends SAOServerProxy
     @Override
     public void registerRenderers()
     {
+    	RenderingRegistry.registerBlockHandler(new RenderBlockUnbreakable());
     }
 
     @Override
