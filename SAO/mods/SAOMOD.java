@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import SAO.mods.client.gui.SAOGuiHandler;
 import SAO.mods.core.BuildSAOBlock;
 import SAO.mods.core.BuildSAOItem;
@@ -13,6 +14,7 @@ import SAO.mods.core.ConfigBlock;
 import SAO.mods.core.ConfigItem;
 import SAO.mods.core.ConfigWeapon;
 import SAO.mods.core.SAOCreativeTab;
+import SAO.mods.core.SAOEventHookContainer;
 import SAO.mods.core.SAOServerProxy;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -73,6 +75,7 @@ public class SAOMOD
         BuildSAOItem.build(this.configItem);
         BuildSAOItem.addRecipe();
         NetworkRegistry.instance().registerGuiHandler(this, new SAOGuiHandler());
+        MinecraftForge.EVENT_BUS.register(new SAOEventHookContainer());
         this.proxy.registerRenderers();
         this.proxy.registerKeyBinds();
     }
