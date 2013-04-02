@@ -54,7 +54,7 @@ public class ItemSAOWeapon extends Item
     @Override
     public int getDamageVsEntity(Entity par1Entity)
     {
-        int var1 = 0;
+        int var1 = 1;
         int var2 = 0;
         int var3[];
         int var4[];
