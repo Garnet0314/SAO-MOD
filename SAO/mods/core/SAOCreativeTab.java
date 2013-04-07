@@ -15,7 +15,7 @@ public class SAOCreativeTab extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public int getTabIconItemIndex()
     {
-        return BuildSAOWeapon.smallSword.itemID;
+        return BuildSAOWeapon.annealBlade.itemID;
     }
 
     @Override

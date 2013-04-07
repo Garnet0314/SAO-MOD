@@ -39,7 +39,8 @@ public class WorldGenPalace
         	{
         		for (var3 = 0; var3 < 100; var3++)
         		{
-        			if (this.theWorld.getBlockId(this.xPosition + var1, this.yPosition + var2, this.zPosition + var3) != 0)
+        			var4 = this.theWorld.getBlockId(this.xPosition + var1, this.yPosition + var2, this.zPosition + var3);
+        			if (var4 != 0 && var4 != Block.bedrock.blockID)
         			{
         				this.setBlock(this.xPosition + var1, this.yPosition + var2, this.zPosition + var3, 0);
         			}

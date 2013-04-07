@@ -27,12 +27,12 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
 
 /*
- * ”Ä—p”j‰ó•s”\ƒuƒƒbƒNB
- * ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Åw’è‚µ‚½Œ³ƒuƒƒbƒN‚Ì“®ì‚ğƒGƒ~ƒ…ƒŒ[ƒg‚µ‚Â‚Â”j‰ó•s”\‚ÈƒuƒƒbƒN‚ğ’è‹`‚·‚éB
- * ‚È‚¨ABlock.java“à‚Åupublic static final Block stonev‚Ì‚æ‚¤‚ÉBlockŒ^‚Å’è‹`‚³‚ê‚½‚à‚Ì‚ÌƒtƒFƒCƒN‚Æ‚µ‚Ä—˜—p‚·‚é‚±‚Æ‚ğ‘z’è‚µ‚Ä‚¢‚éB
- * Block.java“à‚ÅBlockˆÈŠO‚ÌŒ^‚Å’è‹`‚³‚ê‚Ä‚¢‚é‚à‚Ì‚Í“Á•Ê‚È“®ì‚ğ‚·‚é‚±‚Æ‚ªŠú‘Ò‚³‚ê‚Ä‚¢‚é‚½‚ßA
- * ‚»‚êê—p‚Ì”j‰ó•s”\ƒuƒƒbƒNƒNƒ‰ƒX‚ğ’è‹`‚·‚×‚«‚Å‚ ‚éB
- * ‚Ü‚½Ainstanceof‚ÅƒNƒ‰ƒX‚Ìˆê’v‚ğ”»’è‚³‚ê‚éê‡‚âƒLƒƒƒXƒg‚³‚ê‚éê‡‚àê—pƒNƒ‰ƒX‚ª•K—vB
+ * ï¿½Ä—pï¿½jï¿½ï¿½sï¿½\ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½B
+ * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ï¿½Åwï¿½è‚µï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Â‚Â”jï¿½ï¿½sï¿½\ï¿½Èƒuï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½B
+ * ï¿½È‚ï¿½ï¿½ABlock.javaï¿½ï¿½ï¿½Åupublic static final Block stoneï¿½vï¿½Ì‚æ‚¤ï¿½ï¿½Blockï¿½^ï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ì‚Ìƒtï¿½Fï¿½Cï¿½Nï¿½Æ‚ï¿½ï¿½Ä—ï¿½ï¿½pï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½zï¿½è‚µï¿½Ä‚ï¿½ï¿½ï¿½B
+ * Block.javaï¿½ï¿½ï¿½ï¿½Blockï¿½ÈŠOï¿½ÌŒ^ï¿½Å’ï¿½`ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Í“ï¿½ï¿½Ê‚È“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½ï¿½Ò‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚½ï¿½ßA
+ * ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Ì”jï¿½ï¿½sï¿½\ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½×‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½B
+ * ï¿½Ü‚ï¿½ï¿½Ainstanceofï¿½ÅƒNï¿½ï¿½ï¿½Xï¿½Ìˆï¿½vï¿½ğ”»’è‚³ï¿½ï¿½ï¿½ê‡ï¿½ï¿½Lï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½ï¿½ï¿½pï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½Kï¿½vï¿½B
  */
 public class BlockUnbreakable extends Block {
 
@@ -48,9 +48,9 @@ public class BlockUnbreakable extends Block {
 
 
 	/*
-	 * ƒRƒ“ƒXƒgƒ‰ƒNƒ^(public Block(int par1, Material par2Material)‚Ì‚±‚Æ)‚Åg—p‚³‚ê‚éƒƒ\ƒbƒh‚ÍA
-	 * ˆÚ÷æ(this.original)‚ÉƒAƒNƒZƒX‚µ‚Ä‚Í‚È‚ç‚È‚¢B
-	 * super(...)‚ªŒÄ‚Î‚ê‚é“_‚Å‚Í‘ã“ü‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅB
+	 * ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^(public Block(int par1, Material par2Material)ï¿½Ì‚ï¿½ï¿½ï¿½)ï¿½Ågï¿½pï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½ÍA
+	 * ï¿½Úï¿½ï¿½ï¿½(this.original)ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ä‚Í‚È‚ï¿½È‚ï¿½ï¿½B
+	 * super(...)ï¿½ï¿½ï¿½Ä‚Î‚ï¿½éï¿½_ï¿½Å‚Í‘ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Ì‚ÅB
 	 */
 	@Override
 	public boolean isOpaqueCube() {
@@ -58,7 +58,7 @@ public class BlockUnbreakable extends Block {
 	}
 
 	/*
-	 * ”j‰ó•s”\ƒuƒƒbƒN‚È‚Ì‚Å‹­“xŠÖŒW‚Ìƒƒ\ƒbƒh‚ÍˆÚ÷‚µ‚È‚¢B
+	 * ï¿½jï¿½ï¿½sï¿½\ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½È‚Ì‚Å‹ï¿½ï¿½xï¿½ÖŒWï¿½Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½ÍˆÚï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½B
 	 */
 	@Override
 	public Block setHardness(float par1) {
@@ -88,7 +88,7 @@ public class BlockUnbreakable extends Block {
 	}
 
 	/*
-	 * ê—p‚ÌƒNƒŠƒGƒCƒeƒBƒuƒ^ƒu‚ğw’è‚·‚é‚½‚ßˆÚ÷‚µ‚È‚¢B
+	 * ï¿½ï¿½pï¿½ÌƒNï¿½ï¿½ï¿½Gï¿½Cï¿½eï¿½Bï¿½uï¿½^ï¿½uï¿½ï¿½ï¿½wï¿½è‚·ï¿½é‚½ï¿½ßˆÚï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½B
 	 */
 	@Override
 	public Block setCreativeTab(CreativeTabs par1CreativeTabs) {
@@ -102,7 +102,7 @@ public class BlockUnbreakable extends Block {
 
 
 	/*
-	 * zŠÂQÆ‚Æ‚È‚é‚½‚ßˆÚ÷‚µ‚È‚¢B
+	 * ï¿½zï¿½ÂQï¿½Æ‚Æ‚È‚é‚½ï¿½ßˆÚï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½B
 	 */
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
@@ -111,14 +111,14 @@ public class BlockUnbreakable extends Block {
 
 	@Override
 	public int getRenderType() {
-		// TODO config‚Åİ’è‚Å‚«‚é‚æ‚¤‚É‚·‚é‚±‚Æ
+		// TODO configï¿½Åİ’ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½é‚±ï¿½ï¿½
 		return 51;
 	}
 
 	/*
-	 * ˆÈ‰ºˆÚ÷ƒƒ\ƒbƒh
-	 * ƒl[ƒ€ƒe[ƒuƒ‹‚Ì•ÏX‚É”õ‚¦‚Ä‘S‚Ä@Override‚ğ‚Â‚¯‚é‚±‚ÆB
-	 * ‚Ü‚½AForge‚Ìƒo[ƒWƒ‡ƒ“ƒAƒbƒv‚É‚Í•K‚¸ˆÚ÷˜R‚ê‚ª‚È‚¢‚©Šm”F‚·‚é‚±‚ÆB
+	 * ï¿½È‰ï¿½ï¿½Úï¿½ï¿½ï¿½ï¿½\ï¿½bï¿½h
+	 * ï¿½lï¿½[ï¿½ï¿½ï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Ä‘Sï¿½ï¿½@Overrideï¿½ï¿½ï¿½Â‚ï¿½ï¿½é‚±ï¿½ÆB
+	 * ï¿½Ü‚ï¿½ï¿½AForgeï¿½Ìƒoï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½É‚Í•Kï¿½ï¿½ï¿½Úï¿½ï¿½Rï¿½ê‚ªï¿½È‚ï¿½ï¿½ï¿½ï¿½mï¿½Fï¿½ï¿½ï¿½é‚±ï¿½ÆB
 	 */
 
 	@Override

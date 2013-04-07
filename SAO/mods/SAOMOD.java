@@ -8,10 +8,12 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import SAO.mods.client.gui.SAOGuiHandler;
 import SAO.mods.core.BuildSAOBlock;
+import SAO.mods.core.BuildSAOEntity;
 import SAO.mods.core.BuildSAOItem;
 import SAO.mods.core.BuildSAOWeapon;
 import SAO.mods.core.ConfigBlock;
 import SAO.mods.core.ConfigBuilding;
+import SAO.mods.core.ConfigEntity;
 import SAO.mods.core.ConfigItem;
 import SAO.mods.core.ConfigWeapon;
 import SAO.mods.core.SAOCreativeTab;
@@ -36,13 +38,14 @@ public class SAOMOD
     @SidedProxy(clientSide = "SAO.mods.client.SAOClientProxy", serverSide = "SAO.mods.core.SAOServerProxy")
     public static SAOServerProxy proxy;
 
-    @Mod.Instance("SAO")
+    @Mod.Instance("SAO-MOD")
     public static SAOMOD instance;
 
     private ConfigWeapon configWeapon = new ConfigWeapon();
     private ConfigBlock configBlock = new ConfigBlock();
     private ConfigItem configItem = new ConfigItem();
     private ConfigBuilding configBuilding = new ConfigBuilding();
+    private ConfigEntity configEntity = new ConfigEntity();
 
     public final static CreativeTabs saoTabs = new SAOCreativeTab("SAO");
 
@@ -62,6 +65,7 @@ public class SAOMOD
         	this.configBlock.load(cfg);
         	this.configItem.load(cfg);
         	this.configBuilding.load(cfg);
+        	this.configEntity.load(cfg);
         }
         catch (Exception e)
         {
@@ -80,6 +84,7 @@ public class SAOMOD
         BuildSAOBlock.build(this.configBlock);
         BuildSAOItem.build(this.configItem);
         BuildSAOItem.addRecipe();
+        BuildSAOEntity.build(this.configEntity);
         NetworkRegistry.instance().registerGuiHandler(this, new SAOGuiHandler());
         TickRegistry.registerTickHandler(new SAOServerTickHandler(), Side.SERVER);
         MinecraftForge.EVENT_BUS.register(new SAOEventHookContainer());

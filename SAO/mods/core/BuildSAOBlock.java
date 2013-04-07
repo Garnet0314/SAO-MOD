@@ -6,6 +6,8 @@ import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockComparator;
 import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.block.BlockDeadBush;
+import net.minecraft.block.BlockEndPortal;
+import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockFluid;
 import net.minecraft.block.BlockGrass;
@@ -16,6 +18,7 @@ import net.minecraft.block.BlockMycelium;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.BlockPistonExtension;
 import net.minecraft.block.BlockPistonMoving;
+import net.minecraft.block.BlockPortal;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.BlockTripWireSource;
@@ -41,12 +44,13 @@ public class BuildSAOBlock
         stoneDm = (new BlockStoneDm(par1.blockDm + 1)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone");
         GameRegistry.registerBlock(stoneDm, "StoneDm");
 
-        for(int i = 0; i <= Block.dropper.blockID; ++i) {
+        for (int i = 0; i <= Block.dropper.blockID; ++i)
+        {
         	Block block = Block.blocksList[i];
-        	if(block == null) continue;
+        	if (block == null) continue;
 
-        	// ”Ä—p”j‰ó•s”\ƒuƒƒbƒN‚ÉŒü‚©‚È‚»‚¤‚Èê‡‚ÍƒXƒLƒbƒvB
-        	if(block instanceof BlockGrass ||
+        	// ï¿½Ä—pï¿½jï¿½ï¿½sï¿½\ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ÉŒï¿½È‚ï¿½ï¿½ï¿½ï¿½Èê‡ï¿½ÍƒXï¿½Lï¿½bï¿½vï¿½B
+        	if (block instanceof BlockGrass ||
         			block instanceof BlockFluid ||
         			block instanceof BlockLeaves ||
         			block instanceof BlockPistonBase ||
@@ -63,7 +67,11 @@ public class BuildSAOBlock
         			block instanceof BlockComparator ||
         			block instanceof BlockDaylightDetector ||
         			block instanceof BlockHopper ||
-        			block instanceof BlockRailBase) {
+        			block instanceof BlockRailBase ||
+        			block instanceof BlockPortal ||
+        			block instanceof BlockFire ||
+        			block instanceof BlockEndPortal)
+        	{
         		continue;
         	}
 

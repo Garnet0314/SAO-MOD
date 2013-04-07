@@ -3,7 +3,44 @@
 public enum EnumSAOWeapon
 {
     //耐久、斬撃、刺突、打撃、貫通、地水火風光闇、必要スキルレベル、必要スキル
-    SMALLSWORD(100, 4, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, "Novice");
+    //片手剣、基本：耐久普通・斬撃メイン
+    StoneSword(150, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Sword"),
+    StoneSword2(135, 5, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, "Sword"),
+    AnneealBlade(200, 6, 2, 0, 1, 0, 0, 0, 0, 0, 0, 2, "Sword"),
+
+    //両手剣、基本：耐久高め・斬撃メイン高め・盾持ち不可
+    StoneLongSword(160, 5, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, "LongSword"),
+    StoneLongSword2(144, 6, 1, 0, 2, 0, 0, 0, 0, 0, 0, 1, "LongSword"),
+
+    //細剣、基本：耐久低め・刺突メイン
+    StoneRapier(130, 0, 5, 0, 2, 0, 0, 0, 0, 0, 0, 0, "Rapier"),
+    StoneRapier2(117, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 1, "Rapier"),
+    WindFleuret(120, 0, 5, 0, 2, 0, 0, 0, 2, 0, 0, 2, "Rapier"),
+
+    //曲剣、基本：耐久低め・斬撃メイン高め
+    StoneCurvedSword(130, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "CurvedSword"),
+    StoneCurvedSword2(117, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, "CurvedSword"),
+
+    //槍、基本：耐久高め・貫通メイン
+    StoneSpear(160, 1, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, "Spear"),
+    StoneSpear2(144, 1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 1, "Spear"),
+
+    //斧、基本：耐久普通
+    StoneAxe(150, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Axe"),
+    StoneAxe2(135, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, "Axe"),
+    StoneBattleAxe(170, 6, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, "Axe"),
+    StoneBattleAxe2(153, 7, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, "Axe"),
+
+    //短剣、基本：耐久普通・斬撃メイン低め・属性付が多い
+    StoneShortSword(150, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "ShortSword"),
+    StoneShortSword2(135, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, "ShortSword"),
+
+    //戦槌、基本：耐久普通・打撃メイン高め・盾持ち不可
+
+    //棍、基本：耐久普通、打撃メイン普通
+    StoneClub(150, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, "Club"),
+    StoneClub2(135, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, "Club");
+    //耐久、斬撃、刺突、打撃、貫通、地水火風光闇、必要スキルレベル、必要スキル
 
     private final int maxUses;
 

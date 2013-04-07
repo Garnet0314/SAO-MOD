@@ -28,7 +28,7 @@ public class RenderBlockUnbreakable implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		// TODO config‚Åİ’è‚Å‚«‚é‚æ‚¤‚É‚·‚é‚±‚Æ
+		// TODO configï¿½Åİ’ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½é‚±ï¿½ï¿½
 		return 51;
 	}
 

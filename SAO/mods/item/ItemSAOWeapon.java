@@ -1,10 +1,13 @@
 package SAO.mods.item;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryEnderChest;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import SAO.mods.SAOMOD;
@@ -107,6 +110,30 @@ public class ItemSAOWeapon extends Item
         	}
         }
         return false;
+    }
+
+    @Override
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
+        par3List.add(1, "Durability : " + this.saoWeapon.getMaxUses());
+        par3List.add(2, "Slash : " + this.saoWeapon.getSlashElement() + " Thrust : " + this.saoWeapon.getThrustElement());
+        par3List.add(3, "Strike : " + this.saoWeapon.getStrikeElement() + " Penetrate : " + this.saoWeapon.getPenetrateElement());
+        par3List.add(4, "Earth : " + this.saoWeapon.getQuakeElement() + " Fier : " + this.saoWeapon.getFireElement() + " Shine : " + this.saoWeapon.getShineElement());
+        par3List.add(5, "Water : " + this.saoWeapon.getWaterElement() + " Wind : " + this.saoWeapon.getAeroElement() + " Dark : " + this.saoWeapon.getDarkElement());
+        par3List.add(6, "Skill : " + this.saoWeapon.getSkillType() + " (Level:" + this.saoWeapon.getSkillLevel() + ")");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isFull3D()
+    {
+        return true;
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack par1ItemStack)
+    {
+        return EnumAction.block;
     }
 
     @Override
