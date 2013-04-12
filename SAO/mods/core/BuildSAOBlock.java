@@ -22,11 +22,16 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.BlockTripWireSource;
+import net.minecraft.creativetab.CreativeTabs;
 import SAO.mods.SAOMOD;
+import SAO.mods.block.BlockBossSpawner;
 import SAO.mods.block.BlockGrassUB;
 import SAO.mods.block.BlockStoneDm;
 import SAO.mods.block.BlockUnbreakable;
+import SAO.mods.block.TileEntityBossSpawner;
+import SAO.mods.item.ItemBlockBossSpawner;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BuildSAOBlock
 {
@@ -34,6 +39,8 @@ public class BuildSAOBlock
     public static BlockGrassUB grassUB;
 
     public static Block stoneDm;
+
+    public static Block bossSpawner;
 
     public static Block[] ubBlocksList = new Block[4096];
     public static void build(ConfigBlock par1)
@@ -79,5 +86,11 @@ public class BuildSAOBlock
         	GameRegistry.registerBlock(ubBlocksList[block.blockID], "UB" + String.valueOf(i) + "_" + ubBlocksList[block.blockID].getUnlocalizedName2());
         	System.out.println(block.getClass().getSimpleName());
         }
+
+		bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO-MOD:bossspawner").setCreativeTab(SAOMOD.saoTabs);
+		GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
+		GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
+		LanguageRegistry.instance().addName(bossSpawner,"BossSpawner");
+
     }
 }
