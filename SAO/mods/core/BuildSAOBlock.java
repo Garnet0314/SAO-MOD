@@ -35,7 +35,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BuildSAOBlock
 {
-    public static Block stoneUB;
     public static BlockGrassUB grassUB;
 
     public static Block stoneDm;
@@ -43,6 +42,7 @@ public class BuildSAOBlock
     public static Block bossSpawner;
 
     public static Block[] ubBlocksList = new Block[4096];
+
     public static void build(ConfigBlock par1)
     {
         grassUB = (BlockGrassUB)(new BlockGrassUB(par1.blockUB + 2)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grass");
@@ -56,7 +56,7 @@ public class BuildSAOBlock
         	Block block = Block.blocksList[i];
         	if (block == null) continue;
 
-        	// �ėp�j��s�\�u���b�N�Ɍ�Ȃ����ȏꍇ�̓X�L�b�v�B
+        	// 汎用破壊不能ブロックに向かなそうな場合はスキップ。
         	if (block instanceof BlockGrass ||
         			block instanceof BlockFluid ||
         			block instanceof BlockLeaves ||
@@ -87,10 +87,9 @@ public class BuildSAOBlock
         	System.out.println(block.getClass().getSimpleName());
         }
 
-		bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO-MOD:bossspawner").setCreativeTab(SAOMOD.saoTabs);
-		GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
-		GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
-		LanguageRegistry.instance().addName(bossSpawner,"BossSpawner");
-
+        bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO-MOD:bossspawner").setCreativeTab(SAOMOD.saoTabs);
+        GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
+        GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
+        LanguageRegistry.instance().addName(bossSpawner,"BossSpawner");
     }
 }
