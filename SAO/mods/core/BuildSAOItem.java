@@ -1,4 +1,4 @@
-﻿package SAO.mods.core;
+package SAO.mods.core;
 
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ public class BuildSAOItem
 
     public static void build(ConfigItem par1)
     {
-        //NerveGear
+        //nerveGear
         nerveGear = (new ItemArmor(par1.saoIemID + 0, EnumArmorMaterial.CHAIN, SAOMOD.proxy.addArmor("NerveGear"), 0)).setUnlocalizedName("SAO:item.NerveGear").setCreativeTab(SAOMOD.saoTabs);
         LanguageRegistry.addName(nerveGear, "Nerve Gear");
         LanguageRegistry.instance().addNameForObject(nerveGear, "ja_JP", "ナーブギア");

@@ -1,4 +1,4 @@
-﻿package SAO.mods.item;
+package SAO.mods.item;
 
 public enum EnumSAOWeapon
 {

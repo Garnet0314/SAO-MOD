@@ -1,4 +1,4 @@
-﻿package SAO.mods.core;
+package SAO.mods.core;
 
 import net.minecraft.item.Item;
 import SAO.mods.item.EnumSAOWeapon;

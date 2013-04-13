@@ -22,7 +22,6 @@ import net.minecraft.block.BlockPortal;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.BlockTripWireSource;
-import net.minecraft.creativetab.CreativeTabs;
 import SAO.mods.SAOMOD;
 import SAO.mods.block.BlockBossSpawner;
 import SAO.mods.block.BlockGrassUB;
@@ -45,19 +44,21 @@ public class BuildSAOBlock
 
     public static void build(ConfigBlock par1)
     {
-        grassUB = (BlockGrassUB)(new BlockGrassUB(par1.blockUB + 2)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grass");
+        grassUB = (BlockGrassUB)(new BlockGrassUB(par1.blockUB + Block.grass.blockID)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grass");
         GameRegistry.registerBlock(grassUB, "GrassUB");
 
-        stoneDm = (new BlockStoneDm(par1.blockDm + 1)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone");
+        stoneDm = (new BlockStoneDm(par1.blockDm + Block.stone.blockID)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone");
         GameRegistry.registerBlock(stoneDm, "StoneDm");
 
-        for (int i = 0; i <= Block.dropper.blockID; ++i)
+        for (int i = 0; i <= Block.dropper.blockID; i++)
         {
         	Block block = Block.blocksList[i];
-        	if (block == null) continue;
-
-        	// 汎用破壊不能ブロックに向かなそうな場合はスキップ。
-        	if (block instanceof BlockGrass ||
+        	if (block == null)
+        	{
+        		continue;
+        	}
+        	//汎用破壊不能ブロックに向かなそうな場合はスキップ
+        	else if (block instanceof BlockGrass ||
         			block instanceof BlockFluid ||
         			block instanceof BlockLeaves ||
         			block instanceof BlockPistonBase ||
@@ -87,9 +88,9 @@ public class BuildSAOBlock
         	System.out.println(block.getClass().getSimpleName());
         }
 
-        bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO-MOD:bossspawner").setCreativeTab(SAOMOD.saoTabs);
+        bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO:block.BossSpawner").setCreativeTab(SAOMOD.saoTabs);
         GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
         GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
-        LanguageRegistry.instance().addName(bossSpawner,"BossSpawner");
+        LanguageRegistry.addName(bossSpawner, "BossSpaner");
     }
 }
