@@ -48,6 +48,8 @@ public class SAOMOD
     private ConfigEntity configEntity = new ConfigEntity();
 
     public final static CreativeTabs saoTabs = new SAOCreativeTab("SAO");
+    public final static CreativeTabs saoBlocks = new SAOCreativeTab("Block");
+    public final static CreativeTabs saoWeapons = new SAOCreativeTab("Weapon");
 
     private KeyBinding keyBinding;
 

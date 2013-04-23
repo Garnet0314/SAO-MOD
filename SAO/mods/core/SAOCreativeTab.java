@@ -22,6 +22,6 @@ public class SAOCreativeTab extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public String getTranslatedTabLabel()
     {
-        return "SAO";
+        return this.getTabLabel();
     }
 }

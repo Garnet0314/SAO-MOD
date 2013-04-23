@@ -83,12 +83,12 @@ public class BuildSAOBlock
         		continue;
         	}
 
-        	ubBlocksList[block.blockID] = new BlockUnbreakable(par1.blockUB + i, block).setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(SAOMOD.saoTabs);
+        	ubBlocksList[block.blockID] = new BlockUnbreakable(par1.blockUB + i, block).setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(SAOMOD.saoBlocks);
         	GameRegistry.registerBlock(ubBlocksList[block.blockID], "UB" + String.valueOf(i) + "_" + ubBlocksList[block.blockID].getUnlocalizedName2());
         	System.out.println(block.getClass().getSimpleName());
         }
 
-        bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO:block.BossSpawner").setCreativeTab(SAOMOD.saoTabs);
+        bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("SAO:block.BossSpawner").setCreativeTab(SAOMOD.saoBlocks);
         GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
         GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
         LanguageRegistry.addName(bossSpawner, "BossSpaner");

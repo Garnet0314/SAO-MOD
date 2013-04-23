@@ -10,7 +10,7 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import SAO.mods.SAOMOD;
-import SAO.mods.core.BuildSAOBlock;
+import SAO.mods.core.ConfigBlock;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -27,7 +27,7 @@ public class BlockGrassUB extends Block
     {
         super(par1, Material.grass);
         this.setTickRandomly(true);
-        this.setCreativeTab(SAOMOD.saoTabs);
+        this.setCreativeTab(SAOMOD.saoBlocks);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class BlockGrassUB extends Block
         {
         	if (par1World.getBlockLightValue(par2, par3 + 1, par4) < 4 && par1World.getBlockLightOpacity(par2, par3 + 1, par4) > 2)
         	{
-        		par1World.setBlock(par2, par3, par4, Block.dirt.blockID);
+        		par1World.setBlock(par2, par3, par4, ConfigBlock.blockUB + Block.dirt.blockID);
         	}
         	else if (par1World.getBlockLightValue(par2, par3 + 1, par4) >= 9)
         	{
@@ -55,9 +55,9 @@ public class BlockGrassUB extends Block
         			int k1 = par4 + par5Random.nextInt(3) - 1;
         			int l1 = par1World.getBlockId(i1, j1 + 1, k1);
 
-        			if (par1World.getBlockId(i1, j1, k1) == Block.dirt.blockID && par1World.getBlockLightValue(i1, j1 + 1, k1) >= 4 && par1World.getBlockLightOpacity(i1, j1 + 1, k1) <= 2)
+        			if (par1World.getBlockId(i1, j1, k1) == ConfigBlock.blockUB + Block.dirt.blockID && par1World.getBlockLightValue(i1, j1 + 1, k1) >= 4 && par1World.getBlockLightOpacity(i1, j1 + 1, k1) <= 2)
         			{
-        				par1World.setBlock(i1, j1, k1, BuildSAOBlock.grassUB.blockID);
+        				par1World.setBlock(i1, j1, k1, ConfigBlock.blockUB + Block.grass.blockID);
         			}
         		}
         	}

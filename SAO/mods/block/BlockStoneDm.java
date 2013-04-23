@@ -16,7 +16,7 @@ public class BlockStoneDm extends Block
     public BlockStoneDm(int par1)
     {
         super(par1, Material.rock);
-        this.setCreativeTab(SAOMOD.saoTabs);
+        this.setCreativeTab(SAOMOD.saoBlocks);
     }
 
     @Override

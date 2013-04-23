@@ -20,7 +20,7 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     public EntitySAOZombie(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/zombie.png";
+        this.texture = "/mods/SAO/textures/mobs/zombie/normal.png";
         this.moveSpeed = 0.23F;
         this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -38,9 +38,33 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     {
         if (this.getEntityType() == 0)
         {
-        	return "/mob/zombie.png";
+        	return "/mods/SAO/textures/mobs/zombie/normal.png";
         }
-        return "/mob/zombie.png";
+        else if (this.getEntityType() == 1)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/earth.png";
+        }
+        else if (this.getEntityType() == 2)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/water.png";
+        }
+        else if (this.getEntityType() == 3)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/fire.png";
+        }
+        else if (this.getEntityType() == 4)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/wind.png";
+        }
+        else if (this.getEntityType() == 5)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/light.png";
+        }
+        else if (this.getEntityType() == 6)
+        {
+        	return "/mods/SAO/textures/mobs/zombie/dark.png";
+        }
+        return "/mods/SAO/textures/mobs/zombie/normal.png";
     }
 
     @Override
@@ -168,6 +192,11 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
         if (this.worldObj.provider instanceof WorldProviderHell)
         {
         	this.setEntityType(3);
+        }
+        else
+        {
+        	int var1 = this.getRNG().nextInt(7);
+        	this.setEntityType(var1);
         }
     }
 

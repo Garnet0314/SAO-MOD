@@ -1,5 +1,6 @@
 package SAO.mods.item;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -8,8 +9,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import SAO.mods.SAOMOD;
 import SAO.mods.entity.ISAOMob;
 import cpw.mods.fml.relauncher.Side;
@@ -18,14 +22,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemSAOWeapon extends Item
 {
     private final EnumSAOWeapon saoWeapon;
+    private EntityLiving theTarget;
+    private double moveX;
+    private double moveZ;
+    private double posX;
+    private double posZ;
 
     public ItemSAOWeapon(int par1, EnumSAOWeapon par2EnumSAOWeapon)
     {
         super(par1);
         this.saoWeapon = par2EnumSAOWeapon;
+        this.moveX = 0.0D;
+        this.moveZ = 0.0D;
+        this.posX = 0.0D;
+        this.posZ = 0.0D;
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumSAOWeapon.getMaxUses());
-        this.setCreativeTab(SAOMOD.saoTabs);
+        this.setCreativeTab(SAOMOD.saoWeapons);
     }
 
     @Override
@@ -37,6 +50,16 @@ public class ItemSAOWeapon extends Item
         	if (this.checkSkill(par1ItemStack, var1))
         	{
         		par1ItemStack.damageItem(1, par3EntityLiving);
+        		if (!this.doingSwordSkill(par1ItemStack) && var1.isSneaking() && var1.getDistanceSqToEntity(par2EntityLiving) < 25.0D)
+        		{
+        			this.setSwordSkill(par1ItemStack, true);
+        			this.theTarget = par2EntityLiving;
+        			this.moveX = par2EntityLiving.posX - var1.posX;
+        			this.moveZ = par2EntityLiving.posZ - var1.posZ;
+        			double var2 = Math.sqrt(this.moveX * this.moveX + this.moveZ * this.moveZ) * 0.25D;
+        			this.moveX = this.moveX / var2;
+        			this.moveZ = this.moveZ / var2;
+        		}
         	}
         	else
         	{
@@ -55,7 +78,7 @@ public class ItemSAOWeapon extends Item
     }
 
     @Override
-    public int getDamageVsEntity(Entity par1Entity)
+    public int getDamageVsEntity(Entity par1Entity, ItemStack par2ItemStack)
     {
         int var1 = 1;
         int var2 = 0;
@@ -86,6 +109,14 @@ public class ItemSAOWeapon extends Item
         {
         	var2 += var4[var5];
         }
+
+        if (this.doingSwordSkill(par2ItemStack))
+        {
+        	var1 = var1 / 5 + 1;
+        	var2 = var2 / 4;
+        }
+
+        System.out.println(var1 + var2);
         return var1 + var2;
     }
 
@@ -109,6 +140,110 @@ public class ItemSAOWeapon extends Item
         		}
         	}
         }
+        //TODO いずれスキルシステムが完成したらfalseへ
+        return true;
+    }
+
+    @Override
+    public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
+    {
+        super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
+        if (par5)
+        {
+        	if (this.doingSwordSkill(par1ItemStack))
+        	{
+        		if (par3Entity instanceof EntityPlayer)
+        		{
+        			int var1 = this.getTimerSkill(par1ItemStack);
+        			if (this.theTarget == null || !this.theTarget.isEntityAlive() || par3Entity.getDistanceSqToEntity(this.theTarget) > 36.0D || var1 > 70)
+        			{
+        				this.setTimerSkill(par1ItemStack, 0);
+        				this.setSwordSkill(par1ItemStack, false);
+        				return;
+        			}
+
+        			EntityPlayer var2 = (EntityPlayer)par3Entity;
+        			if (var1 == 42)
+        			{
+        				this.posX = this.theTarget.posX - this.moveX;
+        				this.posZ = this.theTarget.posZ - this.moveZ;
+        			}
+        			else if (var1 > 42)
+        			{
+        				var2.setPosition(this.posX, var2.posY, this.posZ);
+        			}
+        			else
+        			{
+        				if (var1 % 7 == 0)
+        				{
+        					var2.swingItem();
+        					List var3 = var2.worldObj.selectEntitiesWithinAABB(EntityLiving.class, var2.boundingBox.expand(2.0D, 0.0D, 2.0D), null);
+        					Iterator var4 = var3.iterator();
+        					while (var4.hasNext())
+        					{
+        						EntityLiving var5 = (EntityLiving)var4.next();
+        						if (var5 != null && var5.isEntityAlive() && var5 != this.theTarget)
+        						{
+        							var2.attackTargetEntityWithCurrentItem(var5);
+        						}
+        					}
+        					var2.attackTargetEntityWithCurrentItem(this.theTarget);
+        				}
+        				var2.setPosition(this.theTarget.posX - this.moveX, var2.posY, this.theTarget.posZ - this.moveZ);
+        			}
+        			if (!par2World.isRemote)
+        			{
+        				this.setTimerSkill(par1ItemStack, var1 + 1);
+        			}
+        		}
+        	}
+        }
+        else if (this.getTimerSkill(par1ItemStack) > 0)
+        {
+        	this.setTimerSkill(par1ItemStack, 0);
+        }
+        else if (this.doingSwordSkill(par1ItemStack))
+        {
+        	this.setSwordSkill(par1ItemStack, false);
+        }
+    }
+
+    private void setSwordSkill(ItemStack par1ItemStack, boolean par2)
+    {
+        this.checkTag(par1ItemStack);
+        NBTTagCompound var1 = par1ItemStack.getTagCompound();
+        var1.setBoolean("SwordSkill", par2);
+    }
+
+    private boolean doingSwordSkill(ItemStack par1ItemStack)
+    {
+        this.checkTag(par1ItemStack);
+        return par1ItemStack.getTagCompound().getBoolean("SwordSkill");
+    }
+
+    private void setTimerSkill(ItemStack par1ItemStack, int par2)
+    {
+        this.checkTag(par1ItemStack);
+        NBTTagCompound var1 = par1ItemStack.getTagCompound();
+        var1.setInteger("AcuateTime", par2);
+    }
+
+    private int getTimerSkill(ItemStack par1ItemStack)
+    {
+        this.checkTag(par1ItemStack);
+        return par1ItemStack.getTagCompound().getInteger("AcuateTime");
+    }
+
+    private boolean checkTag(ItemStack par1ItemStack)
+    {
+        if (par1ItemStack.hasTagCompound())
+        {
+        	return true;
+        }
+        NBTTagCompound var1 = new NBTTagCompound();
+        par1ItemStack.setTagCompound(var1);
+        var1.setBoolean("SwordSkill", false);
+        var1.setInteger("AcuateTime", 0);
         return false;
     }
 
@@ -134,6 +269,18 @@ public class ItemSAOWeapon extends Item
     public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.block;
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack par1ItemStack)
+    {
+        return this.doingSwordSkill(par1ItemStack);
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack par1ItemStack)
+    {
+        return this.doingSwordSkill(par1ItemStack) ? EnumRarity.rare : EnumRarity.common;
     }
 
     @Override
