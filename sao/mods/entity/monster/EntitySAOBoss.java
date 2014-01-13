@@ -1,4 +1,4 @@
-package sao.mods.entity;
+package sao.mods.entity.monster;
 
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
@@ -7,14 +7,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import sao.mods.block.TileEntityBossSpawner;
+import sao.mods.entity.ISAOMob;
 
 public abstract class EntitySAOBoss extends EntityMob implements ISAOMob, IBossDisplayData
 {
-	int xCoord;
-	int yCoord;
-	int zCoord;
+    int xCoord;
+    int yCoord;
+    int zCoord;
 
-	public EntitySAOBoss(World par1World)
+    public EntitySAOBoss(World par1World)
     {
         super(par1World);
     }
@@ -142,45 +143,53 @@ public abstract class EntitySAOBoss extends EntityMob implements ISAOMob, IBossD
         return 0;
     }
 
-	@Override
-	protected boolean canDespawn() {
-		return true;
-	}
+    @Override
+    protected boolean canDespawn()
+    {
+        return true;
+    }
 
-	@Override
-	public void setDead() {
-		if(this.func_110143_aJ() <= 0.0F) {
-		}
-		else {
-			TileEntity tile = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
-			if(tile instanceof TileEntityBossSpawner) {
-				((TileEntityBossSpawner)tile).spawned = false;
-			}
-		}
-		super.setDead();
-	}
+    @Override
+    public void setDead()
+    {
+        if(this.getHealth() <= 0.0F)
+        {
+        }
+        else
+        {
+        	TileEntity tile = this.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
+        	if(tile instanceof TileEntityBossSpawner)
+        	{
+        		((TileEntityBossSpawner)tile).spawned = false;
+        	}
+        }
+        super.setDead();
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeEntityToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setIntArray("SpawnerPosition", new int[]{xCoord, yCoord, zCoord});
-	}
+    @Override
+    public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound)
+    {
+        super.writeEntityToNBT(par1nbtTagCompound);
+        par1nbtTagCompound.setIntArray("SpawnerPosition", new int[]{xCoord, yCoord, zCoord});
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readEntityFromNBT(par1nbtTagCompound);
-		int[] pos = par1nbtTagCompound.getIntArray("SpawnerPosition");
-		if(pos != null) {
-			xCoord = pos[0];
-			yCoord = pos[1];
-			zCoord = pos[2];
-		}
-	}
+    @Override
+    public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound)
+    {
+        super.readEntityFromNBT(par1nbtTagCompound);
+        int[] pos = par1nbtTagCompound.getIntArray("SpawnerPosition");
+        if(pos != null)
+        {
+        	xCoord = pos[0];
+        	yCoord = pos[1];
+        	zCoord = pos[2];
+        }
+    }
 
-	public void setSpawnerPosition(int xCoord, int yCoord, int zCoord) {
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
-		this.zCoord = zCoord;
-
-	}
+    public void setSpawnerPosition(int xCoord, int yCoord, int zCoord)
+    {
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+        this.zCoord = zCoord;
+    }
 }

@@ -1,9 +1,9 @@
-package sao.mods.client;
+package sao.mods.client.renderer;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.BossStatus;
-import sao.mods.entity.EntitySAOBoss;
+import sao.mods.entity.monster.EntitySAOBoss;
 
 public class RenderSAOBoss extends RenderSAOMob
 {
@@ -21,6 +21,6 @@ public class RenderSAOBoss extends RenderSAOMob
 
     public void renderBoss(EntitySAOBoss par1EntitySAOBoss, double par2, double par4, double par6, float par8, float par9)
     {
-        BossStatus.func_82824_a(par1EntitySAOBoss, true);
+        BossStatus.setBossStatus(par1EntitySAOBoss, true);
     }
 }

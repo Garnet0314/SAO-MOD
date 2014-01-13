@@ -1,62 +1,58 @@
-package sao.mods.entity;
+package sao.mods.entity.monster;
 
+import garnet.mods.EntityGarnetAIAttackOnCollide;
+import garnet.mods.EntityGarnetAIHurtByTarget;
+import garnet.mods.EntityGarnetAINearestAttackableTarget;
+import garnet.mods.entity.passive.EntityGarnetBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
-import sao.mods.entity.ai.EntitySAOAINearestAttackableTarget;
 
-public class EntitySAOZombie extends EntityMob implements ISAOMob
+public class EntitySAOZombie extends EntitySAOEnemy
 {
-    //TODO
-    protected float moveSpeed;
-    protected String texture;
-
     public EntitySAOZombie(World par1World)
     {
         super(par1World);
-        this.texture = "/mods/sao/textures/mobs/zombie/normal.png";
-        this.moveSpeed = 0.23F;
         this.getNavigator().setBreakDoors(true);
+
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, this.moveSpeed, false));
-        this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntitySAOAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0.0F, true));
+        this.tasks.addTask(2, new EntityGarnetAIAttackOnCollide(this, 1.0D, false));
+        this.tasks.addTask(3, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(4, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityGarnetAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityGarnetAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityGarnetAINearestAttackableTarget(this, EntityGarnetBase.class, true));
     }
 
     @Override
-    protected void func_110147_ax()
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(25.0D);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
         if (this.getEntityType() == 4)
         {
-        	this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.475D);
+        	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.475D);
         }
         else if (this.getEntityType() == 5)
         {
-        	this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.345D);
+        	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.345D);
         }
         else
         {
-        	this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.23D);
+        	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.23D);
         }
-        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
     }
 
     @Override
@@ -64,39 +60,33 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     {
         if (this.getEntityType() == 0)
         {
-        	return "/mods/sao/textures/mobs/zombie/normal.png";
+        	return "zombie/normal";
         }
         else if (this.getEntityType() == 1)
         {
-        	return "/mods/sao/textures/mobs/zombie/earth.png";
+        	return "zombie/earth";
         }
         else if (this.getEntityType() == 2)
         {
-        	return "/mods/sao/textures/mobs/zombie/water.png";
+        	return "zombie/water";
         }
         else if (this.getEntityType() == 3)
         {
-        	return "/mods/sao/textures/mobs/zombie/fire.png";
+        	return "zombie/fire";
         }
         else if (this.getEntityType() == 4)
         {
-        	return "/mods/sao/textures/mobs/zombie/wind.png";
+        	return "zombie/wind";
         }
         else if (this.getEntityType() == 5)
         {
-        	return "/mods/sao/textures/mobs/zombie/light.png";
+        	return "zombie/light";
         }
         else if (this.getEntityType() == 6)
         {
-        	return "/mods/sao/textures/mobs/zombie/dark.png";
+        	return "zombie/dark";
         }
-        return "/mods/sao/textures/mobs/zombie/normal.png";
-    }
-
-    @Override
-    protected boolean isAIEnabled()
-    {
-        return true;
+        return "zombie/normal";
     }
 
     @Override
@@ -136,7 +126,7 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(15, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
     }
 
     @Override
@@ -193,9 +183,9 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     }
 
     @Override
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
     {
-        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 
         if (this.worldObj.provider instanceof WorldProviderHell)
         {
@@ -212,12 +202,12 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
 
     private int getEntityType()
     {
-        return this.dataWatcher.getWatchableObjectByte(15);
+        return this.dataWatcher.getWatchableObjectByte(17);
     }
 
     private void setEntityType(int par1)
     {
-        this.dataWatcher.updateObject(15, Byte.valueOf((byte)par1));
+        this.dataWatcher.updateObject(17, Byte.valueOf((byte)par1));
         this.isImmuneToFire = par1 == 3;
     }
 
@@ -236,27 +226,9 @@ public class EntitySAOZombie extends EntityMob implements ISAOMob
     }
 
     @Override
-    public int getSlashResist()
-    {
-        return 0;
-    }
-
-    @Override
     public int getThrustResist()
     {
         return 20;
-    }
-
-    @Override
-    public int getStrikeResist()
-    {
-        return 0;
-    }
-
-    @Override
-    public int getPenetrateResist()
-    {
-        return 0;
     }
 
     @Override

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import sao.mods.world.TeleporterSAO;
 
 public class SAOEventHookContainer
 {
@@ -16,21 +17,19 @@ public class SAOEventHookContainer
         if (event.entityPlayer.isRiding() == false && event.entityPlayer instanceof EntityPlayerMP)
         {
         	EntityPlayerMP thePlayer = (EntityPlayerMP) event.entityPlayer;
+        	//移動するDimensionのID
+        	int DimensionID = ConfigWorld.aincradDimensionID;
 
-        	//thePlayer.inventory.armorItemInSlot(3)でプレイヤーの装備品の取得
-        	ItemStack headItem = thePlayer.inventory.armorItemInSlot(3);
-
-        	//頭に何か装備しているか
-        	if (headItem != null)
+        	//現実世界かどうか
+        	if (thePlayer.worldObj.provider.dimensionId == 0)
         	{
-        		//装備している防具はチェーンヘルメットか
-        		if (headItem.itemID == SAOItem.nerveGear.itemID)
+        		//thePlayer.inventory.armorItemInSlot(3)でプレイヤーの装備品の取得
+        		ItemStack headItem = thePlayer.inventory.armorItemInSlot(3);
+        		//頭の防具はナーブギアか
+        		if (headItem != null && headItem.itemID == SAOItem.nerveGear.itemID)
         		{
-        			//TODO 移動するDimensionのID(Dimensionが作れたらそちらに変更)
-        			int DimensionID = -1;
-
         			thePlayer.timeUntilPortal = 20;
-        			thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer,DimensionID);
+        			thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, DimensionID, new TeleporterSAO(thePlayer.mcServer.worldServerForDimension(DimensionID)));
         		}
         	}
         }

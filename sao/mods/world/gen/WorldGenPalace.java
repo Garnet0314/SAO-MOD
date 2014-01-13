@@ -1,4 +1,4 @@
-package sao.mods.building;
+package sao.mods.world.gen;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -32,11 +32,11 @@ public class WorldGenPalace
         int var4;
 
         //基準点から上へ100x100x100を空気へ変換
-        for (var1 = 0; var1 < 100; var1++)
+        for (var1 = -50; var1 < 50; var1++)
         {
         	for (var2 = 0; var2 < 100; var2++)
         	{
-        		for (var3 = 0; var3 < 100; var3++)
+        		for (var3 = -50; var3 < 50; var3++)
         		{
         			var4 = this.theWorld.getBlockId(this.xPosition + var1, this.yPosition + var2, this.zPosition + var3);
         			if (var4 != 0 && var4 != Block.bedrock.blockID)
@@ -48,11 +48,11 @@ public class WorldGenPalace
         }
 
         //基準点から下へ100x32x100を壊せない石ブロックへ変換
-        for (var1 = 0; var1 < 100; var1++)
+        for (var1 = -50; var1 < 50; var1++)
         {
         	for (var2 = 0; var2 < 32; var2++)
         	{
-        		for (var3 = 0; var3 < 100; var3++)
+        		for (var3 = -50; var3 < 50; var3++)
         		{
         			this.setBlock(this.xPosition + var1, this.yPosition - var2 - 1, this.zPosition + var3, ConfigBlock.blockUB + Block.stone.blockID);
         		}
@@ -69,7 +69,7 @@ public class WorldGenPalace
         			var4 = this.getBlockFromLayer(this.createLayer[var2][var1][var3]);
         			if (var4 != 0)
         			{
-        				this.setBlock(this.xPosition + var1, this.yPosition + var2, this.zPosition + var3, var4);
+        				this.setBlock(this.xPosition + var1 - 50, this.yPosition + var2, this.zPosition + var3 - 50, var4);
         			}
         		}
         	}

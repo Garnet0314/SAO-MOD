@@ -6,7 +6,7 @@ public class ConfigEntity
 {
     public static int entityID;
 
-    public void load(Configuration cfg)
+    public void preLoad(Configuration cfg)
     {
         this.entityID = cfg.get("entity", "entityID", 1000).getInt();
     }

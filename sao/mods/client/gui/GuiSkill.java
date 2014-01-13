@@ -49,7 +49,7 @@ public class GuiSkill extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.func_110434_K().func_110577_a(this.thePath);
+        this.mc.getTextureManager().bindTexture(this.thePath);
         int var1 = (this.width - this.xSize) / 2;
         int var2 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var1, var2, 0, 0, this.xSize, this.ySize);

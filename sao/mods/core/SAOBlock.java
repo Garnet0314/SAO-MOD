@@ -44,20 +44,21 @@ public class SAOBlock
 
     public static void build(ConfigBlock par1)
     {
-        grassUB = (BlockGrassUB)(new BlockGrassUB(par1.blockUB + Block.grass.blockID)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grass");
+        //TODO バイオーム生成時に基盤となるブロックのblockIDはbyte指定
+        grassUB = (BlockGrassUB)(new BlockGrassUB(200 /* par1.blockUB + Block.grass.blockID */)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("grassUB").setTextureName("grass");
         GameRegistry.registerBlock(grassUB, "GrassUB");
 
-        stoneDm = (new BlockStoneDm(par1.blockDm + Block.stone.blockID)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("stone");
+        stoneDm = (new BlockStoneDm(par1.blockDm + Block.stone.blockID)).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundStoneFootstep).setTextureName("stone");
         GameRegistry.registerBlock(stoneDm, "StoneDm");
 
-        for (int i = 0; i <= Block.dropper.blockID; i++)
+        for (int i = 0; i <= Block.coalBlock.blockID; i++)
         {
         	Block block = Block.blocksList[i];
         	if (block == null)
         	{
         		continue;
         	}
-        	//汎用破壊不能ブロックに向かなそうな場合はスキップ
+        	//TODO 汎用破壊不能ブロックに向かなそうな場合はスキップ
         	else if (block instanceof BlockGrass ||
         			block instanceof BlockFluid ||
         			block instanceof BlockLeaves ||
@@ -91,6 +92,6 @@ public class SAOBlock
         bossSpawner = new BlockBossSpawner(par1.blockBossSpawner).setHardness(5.0F).setBlockUnbreakable().setResistance(6000000.0F).setUnlocalizedName("sao:block.BossSpawner").setCreativeTab(SAOMOD.saoBlocks);
         GameRegistry.registerTileEntity(TileEntityBossSpawner.class, "TileEntityBossSpawner");
         GameRegistry.registerBlock(bossSpawner, ItemBlockBossSpawner.class, "BossSpawner", "SAO-MOD");
-        LanguageRegistry.addName(bossSpawner, "BossSpaner");
+        LanguageRegistry.addName(bossSpawner, "BossSpawner");
     }
 }

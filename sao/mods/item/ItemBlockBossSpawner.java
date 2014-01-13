@@ -10,13 +10,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import sao.mods.block.TileEntityBossSpawner;
 
-public class ItemBlockBossSpawner extends ItemBlock {
+public class ItemBlockBossSpawner extends ItemBlock
+{
+    public ItemBlockBossSpawner(int par1)
+    {
+        super(par1);
+    }
 
-	public ItemBlockBossSpawner(int par1) {
-		super(par1);
-	}
-
-	@Override
+    @Override
     public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
     {
 		if(stack.hasTagCompound() == false){
@@ -85,11 +86,10 @@ public class ItemBlockBossSpawner extends ItemBlock {
 		return par1ItemStack.hasTagCompound() && par1ItemStack.getTagCompound().hasKey("MobNBT");
 	}
 
-	/*TODO
-	@Override
-	public boolean itemInteractionForEntity(ItemStack par1ItemStack,
-			EntityLiving par2EntityLiving) {
-
+	/*TODO 詳細不明
+    @Override
+    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
+    {
 		NBTTagCompound tag = new NBTTagCompound();
 
 		par2EntityLiving.addEntityID(tag);

@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import sao.mods.SAOMOD;
+import sao.mods.item.ItemSAOArmor;
 import sao.mods.item.ItemSAOMoney;
 import sao.mods.item.ItemSAOSkill;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -31,52 +32,52 @@ public class SAOItem
     public static void build(ConfigItem par1)
     {
         //nerveGear
-        nerveGear = (new ItemArmor(par1.saoIemID + 0, EnumArmorMaterial.CHAIN, SAOMOD.proxy.addArmor("NerveGear"), 0)).setUnlocalizedName("SAO:item.NerveGear").setCreativeTab(SAOMOD.saoTabs);
+        nerveGear = (new ItemSAOArmor(par1.saoIemID + 0, EnumArmorMaterial.CHAIN, SAOMOD.proxy.addArmor("NerveGear"), 0)).setUnlocalizedName("nerveGear").setTextureName("sao:item.NerveGear").setCreativeTab(SAOMOD.saoTabs);
         LanguageRegistry.addName(nerveGear, "Nerve Gear");
         LanguageRegistry.instance().addNameForObject(nerveGear, "ja_JP", "ナーブギア");
 
         //SkillSword
-        skillSword = (new ItemSAOSkill(par1.saoIemID + 1, "Sword")).setUnlocalizedName("skillSword");
+        skillSword = (new ItemSAOSkill(par1.saoIemID + 1, "Sword")).setUnlocalizedName("SkillSword");
         LanguageRegistry.addName(skillSword, "Skill : Sword");
         LanguageRegistry.instance().addNameForObject(skillSword, "ja_JP", "片手剣スキル");
 
         //SkillLongSword
-        skillLongSword = (new ItemSAOSkill(par1.saoIemID + 2, "LongSword")).setUnlocalizedName("skillLongSword");
+        skillLongSword = (new ItemSAOSkill(par1.saoIemID + 2, "LongSword")).setUnlocalizedName("SkillLongSword");
         LanguageRegistry.addName(skillLongSword, "Skill : Long Sword");
         LanguageRegistry.instance().addNameForObject(skillLongSword, "ja_JP", "両手剣スキル");
 
         //SkillRapier
-        skillRpier = (new ItemSAOSkill(par1.saoIemID + 3, "Rapier")).setUnlocalizedName("skillRapier");
+        skillRpier = (new ItemSAOSkill(par1.saoIemID + 3, "Rapier")).setUnlocalizedName("SkillRapier");
         LanguageRegistry.addName(skillRpier, "Skill : Rapier");
         LanguageRegistry.instance().addNameForObject(skillRpier, "ja_JP", "細剣スキル");
 
         //SkillCurvedSword
-        skillCurvedSword = (new ItemSAOSkill(par1.saoIemID + 4, "CurvedSword")).setUnlocalizedName("skillCurvedSword");
+        skillCurvedSword = (new ItemSAOSkill(par1.saoIemID + 4, "CurvedSword")).setUnlocalizedName("SkillCurvedSword");
         LanguageRegistry.addName(skillCurvedSword, "Skill : Curved Sword");
         LanguageRegistry.instance().addNameForObject(skillCurvedSword, "ja_JP", "曲剣スキル");
 
         //SkillSpear
-        skillSpear = (new ItemSAOSkill(par1.saoIemID + 5, "Spear")).setUnlocalizedName("skillSpear");
+        skillSpear = (new ItemSAOSkill(par1.saoIemID + 5, "Spear")).setUnlocalizedName("SkillSpear");
         LanguageRegistry.addName(skillSpear, "Skill : Spear");
         LanguageRegistry.instance().addNameForObject(skillSpear, "ja_JP", "槍スキル");
 
         //SkillAxe
-        skillAxe = (new ItemSAOSkill(par1.saoIemID + 6, "Axe")).setUnlocalizedName("skillAxe");
+        skillAxe = (new ItemSAOSkill(par1.saoIemID + 6, "Axe")).setUnlocalizedName("SkillAxe");
         LanguageRegistry.addName(skillAxe, "Skill : Axe");
         LanguageRegistry.instance().addNameForObject(skillAxe, "ja_JP", "斧スキル");
 
         //SkillShortSword
-        skillShortSword = (new ItemSAOSkill(par1.saoIemID + 7, "ShortSword")).setUnlocalizedName("skillShortSword");
+        skillShortSword = (new ItemSAOSkill(par1.saoIemID + 7, "ShortSword")).setUnlocalizedName("SkillShortSword");
         LanguageRegistry.addName(skillShortSword, "Skill : Short Sword");
         LanguageRegistry.instance().addNameForObject(skillShortSword, "ja_JP", "短剣スキル");
 
         //SkillMace
-        skillMace = (new ItemSAOSkill(par1.saoIemID + 8, "Mace")).setUnlocalizedName("skillMace");
+        skillMace = (new ItemSAOSkill(par1.saoIemID + 8, "Mace")).setUnlocalizedName("SkillMace");
         LanguageRegistry.addName(skillMace, "Skill : Mace");
         LanguageRegistry.instance().addNameForObject(skillMace, "ja_JP", "戦槌スキル");
 
         //SkillClub
-        skillClub = (new ItemSAOSkill(par1.saoIemID + 9, "Club")).setUnlocalizedName("skillClub");
+        skillClub = (new ItemSAOSkill(par1.saoIemID + 9, "Club")).setUnlocalizedName("SkillClub");
         LanguageRegistry.addName(skillClub, "Skill : Club");
         LanguageRegistry.instance().addNameForObject(skillClub, "ja_JP", "棍スキル");
 

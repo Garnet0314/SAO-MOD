@@ -1,29 +1,48 @@
 package sao.mods.block;
 
+import static net.minecraftforge.common.ForgeDirection.DOWN;
+import static net.minecraftforge.common.ForgeDirection.UP;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockPoweredOre;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.StepSound;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.RotationHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /*
  * 汎用破壊不能ブロック。
@@ -36,13 +55,13 @@ import net.minecraftforge.common.IPlantable;
 public class BlockUnbreakable extends Block
 {
     public Block original;
-    boolean isOpaqueCubeOriginal;
+    private boolean isOpaqueCubeOriginal;
 
-    public BlockUnbreakable(int par1, Block original)
+    public BlockUnbreakable(int par1, Block par2Block)
     {
-        super(par1, original.blockMaterial);
-        this.original = original;
-        this.isOpaqueCubeOriginal = original.isOpaqueCube();
+        super(par1, par2Block.blockMaterial);
+        this.original = par2Block;
+        this.isOpaqueCubeOriginal = par2Block.isOpaqueCube();
     }
 
     /*
@@ -99,6 +118,7 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public CreativeTabs getCreativeTabToDisplayOn()
     {
         return super.getCreativeTabToDisplayOn();
@@ -125,214 +145,11 @@ public class BlockUnbreakable extends Block
      * ネームテーブルの変更に備えて全て@Overrideをつけること。
      * また、Forgeのバージョンアップ時には必ず移譲漏れがないか確認すること。
      */
+
     @Override
     public Block setStepSound(StepSound par1StepSound)
     {
-        return original.setStepSound(par1StepSound);
-    }
-
-    @Override
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
-    {
-        this.original.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-    }
-
-    @Override
-    public boolean canCollideCheck(int par1, boolean par2)
-    {
-        return this.original.canCollideCheck(par1, par2);
-    }
-
-    @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-        this.original.breakBlock(par1World, par2, par3, par4, par5, par6);
-    }
-
-    @Override
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
-    {
-        this.original.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
-    }
-
-    @Override
-    public int damageDropped(int par1)
-    {
-        return this.original.damageDropped(par1);
-    }
-
-    @Override
-    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
-    {
-        return this.original.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
-    }
-
-    @Override
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack)
-    {
-        return this.original.canPlaceBlockOnSide(par1World, par2, par3, par4, par5, par6ItemStack);
-    }
-
-    @Override
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
-    {
-        return this.original.canPlaceBlockOnSide(par1World, par2, par3, par4, par5);
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
-        return this.original.canPlaceBlockAt(par1World, par2, par3, par4);
-    }
-
-    @Override
-    public int colorMultiplier(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
-    {
-        return this.original.colorMultiplier(par1iBlockAccess, par2, par3, par4);
-    }
-
-    @Override
-    public boolean canProvidePower()
-    {
-        return this.original.canProvidePower();
-    }
-
-    @Override
-    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
-    {
-        return this.original.canBlockStay(par1World, par2, par3, par4);
-    }
-
-    @Override
-    public float getAmbientOcclusionLightValue(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
-    {
-        return this.original.getAmbientOcclusionLightValue(par1iBlockAccess, par2, par3, par4);
-    }
-
-    @Override
-    public void fillWithRain(World par1World, int par2, int par3, int par4)
-    {
-        this.original.fillWithRain(par1World, par2, par3, par4);
-    }
-
-    @Override
-    public boolean isFlowerPot()
-    {
-        return this.original.isFlowerPot();
-    }
-
-    @Override
-    public boolean func_82506_l()
-    {
-        return this.original.func_82506_l();
-    }
-
-    @Override
-    public boolean canDropFromExplosion(Explosion par1Explosion)
-    {
-        return this.original.canDropFromExplosion(par1Explosion);
-    }
-
-    @Override
-    public String getItemIconName()
-    {
-        return this.original.getItemIconName();
-    }
-
-    @Override
-    public boolean canHarvestBlock(EntityPlayer player, int meta)
-    {
-        return this.original.canHarvestBlock(player, meta);
-    }
-
-    @Override
-    public void addCreativeItems(ArrayList itemList)
-    {
-        this.original.addCreativeItems(itemList);
-    }
-
-    @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-        return this.original.createTileEntity(world, metadata);
-    }
-
-    @Override
-    public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
-    {
-        return this.original.canSilkHarvest(world, player, x, y, z, metadata);
-    }
-
-    @Override
-    public boolean canCreatureSpawn(EnumCreatureType type, World world, int x, int y, int z)
-    {
-        return this.original.canCreatureSpawn(type, world, x, y, z);
-    }
-
-    @Override
-    public void beginLeavesDecay(World world, int x, int y, int z)
-    {
-        this.original.beginLeavesDecay(world, x, y, z);
-    }
-
-    @Override
-    public boolean canSustainLeaves(World world, int x, int y, int z)
-    {
-        return this.original.canSustainLeaves(world, x, y, z);
-    }
-
-    @Override
-    public boolean canBeReplacedByLeaves(World world, int x, int y, int z)
-    {
-        return this.original.canBeReplacedByLeaves(world, x, y, z);
-    }
-
-    @Override
-    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side)
-    {
-        return this.original.canConnectRedstone(world, x, y, z, side);
-    }
-
-    @Override
-    public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
-    {
-        return this.original.canPlaceTorchOnTop(world, x, y, z);
-    }
-
-    @Override
-    public boolean canRenderInPass(int pass)
-    {
-        return this.original.canRenderInPass(pass);
-    }
-
-    @Override
-    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
-        return this.original.addBlockHitEffects(worldObj, target, effectRenderer);
-    }
-
-    @Override
-    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
-        return this.original.addBlockDestroyEffects(world, x, y, z, meta, effectRenderer);
-    }
-
-    @Override
-    public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
-    {
-        return this.original.canSustainPlant(world, x, y, z, direction, plant);
-    }
-
-    @Override
-    public boolean canDragonDestroy(World world, int x, int y, int z)
-    {
-        return this.original.canDragonDestroy(world, x, y, z);
-    }
-
-    @Override
-    public boolean equals(Object arg0)
-    {
-        return this.original.equals(arg0);
+        return this.original.setStepSound(par1StepSound);
     }
 
     @Override
@@ -378,18 +195,21 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public float getBlockBrightness(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
     {
         return this.original.getBlockBrightness(par1iBlockAccess, par2, par3, par4);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getMixedBrightnessForBlock(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
     {
         return this.original.getMixedBrightnessForBlock(par1iBlockAccess, par2, par3, par4);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
     {
         return this.original.shouldSideBeRendered(par1iBlockAccess, par2, par3, par4, par5);
@@ -402,18 +222,27 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
     {
         return this.original.getBlockTexture(par1iBlockAccess, par2, par3, par4, par5);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public Icon getIcon(int par1, int par2)
     {
         return this.original.getIcon(par1, par2);
     }
 
     @Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+    {
+        this.original.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return this.original.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
@@ -423,6 +252,12 @@ public class BlockUnbreakable extends Block
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return this.original.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+    }
+
+    @Override
+    public boolean canCollideCheck(int par1, boolean par2)
+    {
+        return this.original.canCollideCheck(par1, par2);
     }
 
     @Override
@@ -438,6 +273,7 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         this.original.randomDisplayTick(par1World, par2, par3, par4, par5Random);
@@ -468,6 +304,12 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+        this.original.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
+
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return this.original.quantityDropped(par1Random);
@@ -480,9 +322,27 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
+    {
+        this.original.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
+    }
+
+    @Override
+    public int damageDropped(int par1)
+    {
+        return this.original.damageDropped(par1);
+    }
+
+    @Override
     public float getExplosionResistance(Entity par1Entity)
     {
         return this.original.getExplosionResistance(par1Entity);
+    }
+
+    @Override
+    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
+    {
+        return this.original.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
     }
 
     @Override
@@ -492,9 +352,28 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return this.original.getRenderBlockPass();
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        return this.original.canPlaceBlockOnSide(par1World, par2, par3, par4, par5);
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack)
+    {
+        return this.original.canPlaceBlockOnSide(par1World, par2, par3, par4, par5, par6ItemStack);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return this.original.canPlaceBlockAt(par1World, par2, par3, par4);
     }
 
     @Override
@@ -534,12 +413,14 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
         return this.original.getBlockColor();
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getRenderColor(int par1)
     {
         return original.getRenderColor(par1);
@@ -549,6 +430,19 @@ public class BlockUnbreakable extends Block
     public int isProvidingWeakPower(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
     {
         return this.original.isProvidingWeakPower(par1iBlockAccess, par2, par3, par4, par5);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int colorMultiplier(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
+    {
+        return this.original.colorMultiplier(par1iBlockAccess, par2, par3, par4);
+    }
+
+    @Override
+    public boolean canProvidePower()
+    {
+        return this.original.canProvidePower();
     }
 
     @Override
@@ -581,13 +475,17 @@ public class BlockUnbreakable extends Block
         return original.quantityDroppedWithBonus(par1, par2Random);
     }
 
-    /*TODO
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
-        this.original.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
+        return this.original.canBlockStay(par1World, par2, par3, par4);
     }
-    */
+
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
+    {
+        this.original.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
+    }
 
     @Override
     public void onPostBlockPlaced(World par1World, int par2, int par3, int par4, int par5)
@@ -613,14 +511,6 @@ public class BlockUnbreakable extends Block
         return this.original.getUnlocalizedName();
     }
 
-    /*TODO
-    @Override
-    public String getUnlocalizedName2()
-    {
-        return this.original.getUnlocalizedName2();
-    }
-    */
-
     @Override
     public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
@@ -640,12 +530,20 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public float getAmbientOcclusionLightValue(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
+    {
+        return this.original.getAmbientOcclusionLightValue(par1iBlockAccess, par2, par3, par4);
+    }
+
+    @Override
     public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6)
     {
         this.original.onFallenUpon(par1World, par2, par3, par4, par5Entity, par6);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int idPicked(World par1World, int par2, int par3, int par4)
     {
         return this.original.idPicked(par1World, par2, par3, par4);
@@ -658,6 +556,7 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         this.original.getSubBlocks(par1, par2CreativeTabs, par3List);
@@ -670,9 +569,34 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
-    public void onSetBlockIDWithMetaData(World par1World, int par2, int par3, int par4, int par5)
+    public void onBlockPreDestroy(World par1World, int par2, int par3, int par4, int par5)
     {
-        this.original.onSetBlockIDWithMetaData(par1World, par2, par3, par4, par5);
+        this.original.onBlockPreDestroy(par1World, par2, par3, par4, par5);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void fillWithRain(World par1World, int par2, int par3, int par4)
+    {
+        this.original.fillWithRain(par1World, par2, par3, par4);
+    }
+
+    @Override
+    public boolean isFlowerPot()
+    {
+        return this.original.isFlowerPot();
+    }
+
+    @Override
+    public boolean func_82506_l()
+    {
+        return this.original.func_82506_l();
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion par1Explosion)
+    {
+        return this.original.canDropFromExplosion(par1Explosion);
     }
 
     @Override
@@ -694,18 +618,30 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public Block setTextureName(String par1Str)
+    {
+        return this.original.setTextureName(par1Str);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
         this.original.registerIcons(par1IconRegister);
     }
 
-    /*TODO
     @Override
-    public boolean isLadder(World world, int x, int y, int z)
+    @SideOnly(Side.CLIENT)
+    public String getItemIconName()
     {
-        return this.original.isLadder(world, x, y, z);
+        return this.original.getItemIconName();
     }
-    */
+
+    @Override
+    public boolean isLadder(World world, int x, int y, int z, EntityLivingBase entity)
+    {
+        return this.original.isLadder(world, x, y, z, entity);
+    }
 
     @Override
     public boolean isBlockNormalCube(World world, int x, int y, int z)
@@ -738,9 +674,21 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public boolean canHarvestBlock(EntityPlayer player, int meta)
+    {
+        return this.original.canHarvestBlock(player, meta);
+    }
+
+    @Override
     public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
     {
         return this.original.removeBlockByPlayer(world, player, x, y, z);
+    }
+
+    @Override
+    public void addCreativeItems(ArrayList itemList)
+    {
+        this.original.addCreativeItems(itemList);
     }
 
     @Override
@@ -774,6 +722,12 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return this.original.createTileEntity(world, metadata);
+    }
+
+    @Override
     public int quantityDropped(int meta, int fortune, Random random)
     {
         return this.original.quantityDropped(meta, fortune, random);
@@ -785,13 +739,23 @@ public class BlockUnbreakable extends Block
         return this.original.getBlockDropped(world, x, y, z, metadata, fortune);
     }
 
-    /*TODO
     @Override
-    public boolean isBed(World world, int x, int y, int z, EntityLiving player)
+    public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+    {
+        return this.original.canSilkHarvest(world, player, x, y, z, metadata);
+    }
+
+    @Override
+    public boolean canCreatureSpawn(EnumCreatureType type, World world, int x, int y, int z)
+    {
+        return this.original.canCreatureSpawn(type, world, x, y, z);
+    }
+
+    @Override
+    public boolean isBed(World world, int x, int y, int z, EntityLivingBase player)
     {
         return this.original.isBed(world, x, y, z, player);
     }
-    */
 
     @Override
     public ChunkCoordinates getBedSpawnPosition(World world, int x, int y, int z, EntityPlayer player)
@@ -818,9 +782,27 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public void beginLeavesDecay(World world, int x, int y, int z)
+    {
+        this.original.beginLeavesDecay(world, x, y, z);
+    }
+
+    @Override
+    public boolean canSustainLeaves(World world, int x, int y, int z)
+    {
+        return this.original.canSustainLeaves(world, x, y, z);
+    }
+
+    @Override
     public boolean isLeaves(World world, int x, int y, int z)
     {
         return this.original.isLeaves(world, x, y, z);
+    }
+
+    @Override
+    public boolean canBeReplacedByLeaves(World world, int x, int y, int z)
+    {
+        return this.original.canBeReplacedByLeaves(world, x, y, z);
     }
 
     @Override
@@ -842,6 +824,30 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
+    {
+        this.original.onBlockExploded(world, x, y, z, explosion);
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side)
+    {
+        return this.original.canConnectRedstone(world, x, y, z, side);
+    }
+
+    @Override
+    public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+    {
+        return this.original.canPlaceTorchOnTop(world, x, y, z);
+    }
+
+    @Override
+    public boolean canRenderInPass(int pass)
+    {
+        return this.original.canRenderInPass(pass);
+    }
+
+    @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
     {
         return this.original.getPickBlock(target, world, x, y, z);
@@ -851,6 +857,26 @@ public class BlockUnbreakable extends Block
     public boolean isBlockFoliage(World world, int x, int y, int z)
     {
         return this.original.isBlockFoliage(world, x, y, z);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+    {
+        return this.original.addBlockHitEffects(worldObj, target, effectRenderer);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+    {
+        return this.original.addBlockDestroyEffects(world, x, y, z, meta, effectRenderer);
+    }
+
+    @Override
+    public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
+    {
+        return this.original.canSustainPlant(world, x, y, z, direction, plant);
     }
 
     @Override
@@ -872,8 +898,50 @@ public class BlockUnbreakable extends Block
     }
 
     @Override
+    public boolean canEntityDestroy(World world, int x, int y, int z, Entity entity)
+    {
+        return this.original.canEntityDestroy(world, x, y, z, entity);
+    }
+
+    @Override
+    public boolean canDragonDestroy(World world, int x, int y, int z)
+    {
+        return this.original.canDragonDestroy(world, x, y, z);
+    }
+
+    @Override
     public boolean isBeaconBase(World worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ)
     {
         return this.original.isBeaconBase(worldObj, x, y, z, beaconX, beaconY, beaconZ);
+    }
+
+    @Override
+    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis)
+    {
+        return this.original.rotateBlock(worldObj, x, y, z, axis);
+    }
+
+    @Override
+    public ForgeDirection[] getValidRotations(World worldObj, int x, int y, int z)
+    {
+        return this.original.getValidRotations(worldObj, x, y, z);
+    }
+
+    @Override
+    public float getEnchantPowerBonus(World world, int x, int y, int z)
+    {
+        return this.original.getEnchantPowerBonus(world, x, y, z);
+    }
+
+    @Override
+    public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour)
+    {
+        return this.original.recolourBlock(world, x, y, z, side, colour);
+    }
+
+    @Override
+    public boolean equals(Object arg0)
+    {
+        return this.original.equals(arg0);
     }
 }

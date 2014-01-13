@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import sao.mods.entity.EntitySAOBoss;
+import sao.mods.entity.monster.EntitySAOBoss;
 
 public class TileEntityBossSpawner extends TileEntity {
 

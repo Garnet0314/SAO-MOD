@@ -107,17 +107,17 @@ public enum EnumSAOWeapon
 
     private final int maxUses;
 
-    private final int slashElement;
-    private final int thrustElement;
-    private final int strikeElement;
-    private final int penetrateElement;
+    private final float slashElement;
+    private final float thrustElement;
+    private final float strikeElement;
+    private final float penetrateElement;
 
-    private final int quakeElement;
-    private final int waterElement;
-    private final int fireElement;
-    private final int aeroElement;
-    private final int shineElement;
-    private final int darkElement;
+    private final float quakeElement;
+    private final float waterElement;
+    private final float fireElement;
+    private final float aeroElement;
+    private final float shineElement;
+    private final float darkElement;
 
     private final int skillLevel;
     private final String skillType;
@@ -147,52 +147,52 @@ public enum EnumSAOWeapon
         return this.maxUses;
     }
 
-    public int getSlashElement()
+    public float getSlashElement()
     {
         return this.slashElement;
     }
 
-    public int getThrustElement()
+    public float getThrustElement()
     {
         return this.thrustElement;
     }
 
-    public int getStrikeElement()
+    public float getStrikeElement()
     {
         return this.strikeElement;
     }
 
-    public int getPenetrateElement()
+    public float getPenetrateElement()
     {
         return this.penetrateElement;
     }
 
-    public int getQuakeElement()
+    public float getQuakeElement()
     {
         return this.quakeElement;
     }
 
-    public int getWaterElement()
+    public float getWaterElement()
     {
         return this.waterElement;
     }
 
-    public int getFireElement()
+    public float getFireElement()
     {
         return this.fireElement;
     }
 
-    public int getAeroElement()
+    public float getAeroElement()
     {
         return this.aeroElement;
     }
 
-    public int getShineElement()
+    public float getShineElement()
     {
         return this.shineElement;
     }
 
-    public int getDarkElement()
+    public float getDarkElement()
     {
         return this.darkElement;
     }

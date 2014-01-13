@@ -16,8 +16,7 @@ public class SAOSaveFile
     {
         try
         {
-        	//TODO いずれSAO用ディメンションへ
-        	File var1File = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(-1).getChunkSaveLocation()).append("\\").append("SAOModSave.dat").toString());
+        	File var1File = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(ConfigWorld.aincradDimensionID).getChunkSaveLocation()).append("\\").append("SAOModSave.dat").toString());
         	if(!var1File.exists())
         	{
         		var1File.createNewFile();
@@ -40,8 +39,7 @@ public class SAOSaveFile
     {
         try
         {
-        	//TODO いずれSAO用ディメンションへ
-        	File var1File = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(-1).getChunkSaveLocation()).append("\\").append("SAOModSave.dat").toString());
+        	File var1File = new File(new StringBuilder().append(FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(ConfigWorld.aincradDimensionID).getChunkSaveLocation()).append("\\").append("SAOModSave.dat").toString());
         	if(!var1File.exists())
         	{
         		return;

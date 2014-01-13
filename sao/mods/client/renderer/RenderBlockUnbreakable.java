@@ -1,4 +1,4 @@
-package sao.mods.client;
+package sao.mods.client.renderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

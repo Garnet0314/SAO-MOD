@@ -14,7 +14,7 @@ public class ConfigWeapon
     public static int maceID;
     public static int clubID;
 
-    public void load(Configuration cfg)
+    public void preLoad(Configuration cfg)
     {
         this.swordID = cfg.getItem("SwordID", 25000).getInt() - 256;
         this.longSwordID = cfg.getItem("LongSwordID", 25100).getInt() - 256;

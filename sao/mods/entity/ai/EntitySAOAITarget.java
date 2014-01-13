@@ -81,8 +81,8 @@ public abstract class EntitySAOAITarget extends EntityAIBase
 
     protected double func_111175_f()
     {
-        AttributeInstance var1 = this.taskOwner.func_110148_a(SharedMonsterAttributes.field_111265_b);
-        return var1 == null ? 16.0D : var1.func_111126_e();
+        AttributeInstance var1 = this.taskOwner.getEntityAttribute(SharedMonsterAttributes.followRange);
+        return var1 == null ? 16.0D : var1.getAttributeValue();
     }
 
     @Override

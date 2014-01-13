@@ -12,7 +12,7 @@ public class ConfigBlock
 
 	public static int blockBossSpawner;
 
-	public void load(Configuration cfg)
+	public void preLoad(Configuration cfg)
     {
         this.blockUB = cfg.getBlock("BlockUB", 3700).getInt();
         this.blockDm = cfg.getBlock("BlockDm", 3900).getInt();

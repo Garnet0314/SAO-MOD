@@ -9,7 +9,7 @@ public class ConfigItem
     public static int money500ID;
     public static int money1000ID;
 
-    public void load(Configuration cfg)
+    public void preLoad(Configuration cfg)
     {
         this.saoIemID= cfg.getItem("SAOItemID", 24000).getInt() - 256;
         this.money100ID = cfg.getItem("money100ID", 27000).getInt();
