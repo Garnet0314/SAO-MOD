@@ -39,14 +39,4 @@ public interface ISAOMob
     float getAeroAttack();
     float getShineAttack();
     float getDarkAttack();
-
-    /*
-     * ソードスキルAI用
-     */
-    boolean shouldSwordSkill();
-    boolean continueSwordSkill();
-    void readySwordSkill();
-    void startSwordSkill();
-    void resetSwordSkill();
-    boolean doSwordSkill(int par1);
 }

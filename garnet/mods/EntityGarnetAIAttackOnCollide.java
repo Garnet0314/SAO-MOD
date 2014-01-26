@@ -133,7 +133,7 @@ public class EntityGarnetAIAttackOnCollide extends EntityAIBase
         	if (this.theHost.getNavigator().getPath() != null)
         	{
         		PathPoint var2 = this.theHost.getNavigator().getPath().getFinalPathPoint();
-        		if (var2 != null && var1.getDistance(var2.xCoord, var2.yCoord, var2.zCoord) < 1.0D)
+        		if (var2 != null && var1.getDistance(var2.xCoord, var2.yCoord, var2.zCoord) < 1)
         		{
         			this.failedPathFindingPenalty = 0;
         		}

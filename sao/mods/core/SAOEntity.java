@@ -1,10 +1,10 @@
 package sao.mods.core;
 
 import sao.mods.SAOMOD;
+import sao.mods.entity.EntitySwordSkill;
 import sao.mods.entity.monster.EntityFrenzyBoar;
 import sao.mods.entity.monster.EntitySAOZombie;
 import sao.mods.entity.passive.EntityKirito;
-import sao.mods.entity.projectile.EntitySwordSkill;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 

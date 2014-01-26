@@ -2,12 +2,10 @@ package sao.mods;
 
 import java.util.logging.Level;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import sao.mods.client.SAOClientTickHandler;
 import sao.mods.client.gui.SAOGuiHandler;
 import sao.mods.core.ConfigBlock;
 import sao.mods.core.ConfigEntity;
@@ -19,7 +17,6 @@ import sao.mods.core.SAOCommonProxy;
 import sao.mods.core.SAOCreativeTab;
 import sao.mods.core.SAOEntity;
 import sao.mods.core.SAOEventHookContainer;
-import sao.mods.core.SAOHPBarManager;
 import sao.mods.core.SAOItem;
 import sao.mods.core.SAOServerTickHandler;
 import sao.mods.core.SAOWeapon;
@@ -68,9 +65,6 @@ public class SAOMOD
 
     public final static int guiSkill = 0;
 
-    public SAOHPBarManager manager = new SAOHPBarManager();
-    public final Minecraft minecraft = Minecraft.getMinecraft();
-
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -105,7 +99,6 @@ public class SAOMOD
         SAOEntity.build(this.configEntity);
         NetworkRegistry.instance().registerGuiHandler(this, new SAOGuiHandler());
 
-        TickRegistry.registerTickHandler(new SAOClientTickHandler(this), Side.CLIENT);
         TickRegistry.registerTickHandler(new SAOServerTickHandler(), Side.SERVER);
         MinecraftForge.EVENT_BUS.register(new SAOEventHookContainer());
         this.proxy.registerRenderers();
