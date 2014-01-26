@@ -1,6 +1,8 @@
-package sao.mods.entity;
+package sao.mods.entity.projectile;
 
 import java.util.List;
+
+import sao.mods.entity.ISAOMob;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -308,7 +310,7 @@ public class EntitySwordSkill extends Entity
         vec3d = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
         vec3d1 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
         //何らかのブロックに当たっているなら
-        if (movingObjectPosition != null)
+        if (movingObjectPosition != null && this.getType() != 3)
         {
         	//終点を当たった点に変更
         	vec3d1 = this.worldObj.getWorldVec3Pool().getVecFromPool(movingObjectPosition.hitVec.xCoord, movingObjectPosition.hitVec.yCoord, movingObjectPosition.hitVec.zCoord);
@@ -410,8 +412,25 @@ public class EntitySwordSkill extends Entity
         				double var3 = var1.motionY;
         				double var4 = var1.motionZ;
 
-        				this.attackEntityAsSkill(var1);
-        				this.setDead();
+        				var1.hurtResistantTime = 0;
+        				if (this.attackEntityAsSkill(var1))
+        				{
+        					if (var1 instanceof EntityLivingBase)
+        					{
+        						if (this.getType() != 3)
+        						{
+        							this.attackDamage -= ((EntityLivingBase) var1).getHealth();
+        							if (this.attackDamage <= 0.0F)
+        							{
+        								this.setDead();
+        							}
+        						}
+        					}
+        					else if (this.getType() != 3)
+        					{
+        						this.setDead();
+        					}
+        				}
 
         				var1.motionX = var2;
         				var1.motionY = var3;
@@ -420,7 +439,7 @@ public class EntitySwordSkill extends Entity
         		}
         	}
         	//ブロックなら
-        	else
+        	else if (this.getType() != 3)
         	{
         		this.setDead();
         	}
@@ -543,7 +562,16 @@ public class EntitySwordSkill extends Entity
     //Z軸の角度を設定する
     public void setAngleZ(float par1)
     {
-        this.dataWatcher.updateObject(16, Integer.valueOf((int)(par1 * 10000.0F)));
+        float var1 = par1;
+        if (var1 > 180.0F)
+        {
+        	var1 = -180.0F - var1 % 180.0F;
+        }
+        else if (var1 < -180.0F)
+        {
+        	var1 = 180.0F - var1 % 180.0F;
+        }
+        this.dataWatcher.updateObject(16, Integer.valueOf((int)(var1 * 10000.0F)));
     }
 
     //Z軸の角度を取得

@@ -12,8 +12,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import sao.mods.entity.EntitySwordSkill;
 import sao.mods.entity.ISAOMob;
+import sao.mods.entity.projectile.EntitySwordSkill;
 import sao.mods.item.ItemSAOWeapon;
 
 public abstract class EntitySAOEnemy extends EntityGarnetEnemy implements ISAOMob
@@ -372,6 +372,40 @@ public abstract class EntitySAOEnemy extends EntityGarnetEnemy implements ISAOMo
     public float getDarkAttack()
     {
         return 0.0F;
+    }
+
+    /* ========== ソードスキルについて ========== */
+    @Override
+    public boolean shouldSwordSkill()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean continueSwordSkill()
+    {
+        return true;
+    }
+
+    @Override
+    public void readySwordSkill() {}
+
+    @Override
+    public void startSwordSkill()
+    {
+        this.setFlying(true);
+    }
+
+    @Override
+    public void resetSwordSkill()
+    {
+        this.setFlying(false);
+    }
+
+    @Override
+    public boolean doSwordSkill(int par1)
+    {
+        return false;
     }
 
     /* =========== 飛行について =========== */

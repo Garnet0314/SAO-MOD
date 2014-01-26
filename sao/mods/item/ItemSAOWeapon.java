@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import sao.mods.SAOMOD;
-import sao.mods.entity.EntitySwordSkill;
+import sao.mods.entity.projectile.EntitySwordSkill;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -339,7 +339,7 @@ public class ItemSAOWeapon extends Item
         	EntitySwordSkill var1 = new EntitySwordSkill(par2World, par3EntityPlayer, 0, 0, 2.5, 1);
         	var1.setAcceleration(-0.3F);
         	var1.setLimitSpeed(0.0F);
-        	var1.setType(1);
+        	var1.setType(3);
         	var1.setElement(0);
         	var1.setSkillSize(0.2F);
         	if (!par2World.isRemote)
